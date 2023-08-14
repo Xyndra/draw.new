@@ -18,3 +18,8 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+# IDEs and tools
+.idea
+.vscode
+qodana.yaml

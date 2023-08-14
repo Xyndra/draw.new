@@ -1,12 +1,8 @@
-# Tauri + Astro
+# Draw.new
 
-This template should help get you started developing with Tauri and Astro.
+A drawing program to be primarily used with stylus pens.<br>
+The goal is to make a program that automatically detects both straight and curved lines, and then converts them into a vector image.<br>
+Also, rulers etc. will be added to help with math or other school-related tasks.<br>
+Colors and gradients are also planned to be added.
 
-> If you're looking the size-optimized version of this template check out the `opt` branch!
-
-![App Screenshot](./Screenshot-light.png#gh-light-mode-only)
-![App Screenshot](./Screenshot-dark.png#gh-dark-mode-only)
-
-## Recommended IDE Setup
-
-[VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer).
+### The program is currently in the earliest stages of development, so there is not much to see here yet, and there is also no clear goal yet.
