@@ -9,7 +9,8 @@
 
 
     let last_time: number = Date.now();
-    function handleMouseDown(event: MouseEvent) {
+    function handleMouseDown(event: PointerEvent) {
+        //console.log(event.pointerId + ": down")
         isDrawing = true
         startX = event.clientX
         startY = event.clientY
@@ -24,10 +25,12 @@
         // Set the current path element to the new path element
         currentPath = newPath
         last_time = Date.now()
+        event.preventDefault()
     }
 
 
-    function handleMouseMove(event: MouseEvent) {
+    function handleMouseMove(event: PointerEvent) {
+        //console.log(event.pointerId + ": move")
         if (!isDrawing) return
         if (!(currentPath instanceof SVGPathElement)) return
         if (Date.now() - last_time < 1000 / 30) return
@@ -41,27 +44,56 @@
         startY = currentY
         // Update the current path element
         currentPath.setAttribute('d', pathData)
+        event.preventDefault()
     }
 
-    function handleMouseUp() {
+    function handleMouseUp(event: PointerEvent) {
+        //console.log(event.pointerId + ": up")
         isDrawing = false
         currentPath = undefined
         pathData = ''
+        event.preventDefault()
     }
+
+    function handleMouseLeave(event: PointerEvent) {
+        //console.log(event.pointerId + ": leave")
+        isDrawing = false
+        currentPath = undefined
+        pathData = ''
+        event.preventDefault()
+    }
+
+    // If touch and stylus only work for a short time, try uncommenting this (Note: I have no idea why this works sometimes):
+    //window.addEventListener('mousemove', function(event) {
+    //    var mouseX = event.clientX;
+    //    var mouseY = event.clientY;
+
+    //    console.log('Mouse position: ' + mouseX + ', ' + mouseY);
+    //});
 </script>
 
 <svg
-        width="500"
-        height="500"
-        xmlns="http://www.w3.org/2000/svg"
-        on:pointerdown={handleMouseDown}
-        on:pointermove={handleMouseMove}
-        on:pointerup={handleMouseUp}
+    width="500"
+    height="500"
+    xmlns="http://www.w3.org/2000/svg"
+    on:pointerdown={handleMouseDown}
+    on:pointermove={handleMouseMove}
+    on:pointerup={handleMouseUp}
+    on:pointerleave={handleMouseLeave}
 />
 
 <style>
     svg {
         border: 1px solid black;
         background: white;
+    }
+    * {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        touch-action: none;
     }
 </style>
