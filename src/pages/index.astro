@@ -1,13 +1,16 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Paper from "../components/Paper.svelte";
 ---
 
 <Layout title="Draw.new">
 	<main>
-
+		<Paper client:load/>
 	</main>
 </Layout>
 
-<style>
-	*
+<style is:global>
+	* {
+		overflow: hidden;
+	}
 </style>
