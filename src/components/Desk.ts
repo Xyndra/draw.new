@@ -53,7 +53,12 @@ export class Desk extends LitElement {
     mouse_start: [number | undefined, number | undefined] = [undefined, undefined];
     handlePan(event: MouseEvent) {
         if (event.type === 'mousedown') {
-                this.mouse_start = [event.clientX, event.clientY];
+            // Only middle mouse button
+            if (event.button !== 1) {
+                console.log(event.button);
+                return;
+            }
+            this.mouse_start = [event.clientX, event.clientY];
         } else if (event.type === 'mousemove') {
                 if (this.mouse_start[0] !== undefined && this.mouse_start[1] !== undefined) {
                         this.translateX += event.clientX - this.mouse_start[0];
@@ -98,10 +103,7 @@ export class Desk extends LitElement {
         });
     }
 
-    override async firstUpdated() {
-        const slotElement = this.shadowRoot!.querySelector('slot') as HTMLSlotElement;
-        console.log(slotElement);
-        await this.waitUntilNotNull();
+    updateSVG(slotElement: HTMLSlotElement) {
         this.svg = (slotElement.assignedElements()[0] as HTMLElement).firstElementChild as SVGSVGElement;
         console.log(this.svg);
         if (!this.svg) {
@@ -110,6 +112,12 @@ export class Desk extends LitElement {
             console.log(slotElement.assignedElements())
             console.log((slotElement.assignedElements()[0] as HTMLElement).firstElementChild)
         }
+    }
+
+    override async firstUpdated() {
+        const slotElement = this.shadowRoot!.querySelector('slot') as HTMLSlotElement;
+        await this.waitUntilNotNull();
+        this.updateSVG(slotElement);
     }
 
     override render() {

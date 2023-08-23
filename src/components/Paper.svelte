@@ -6,6 +6,7 @@
     let startY: number = 0;
     let pathData: string = '';
     let currentPath: SVGPathElement | undefined = undefined;
+    let defaultWidth: number = 500; // ! don't use this for size, only for scale
 
 
     let last_time: number = Date.now();
@@ -14,7 +15,7 @@
         isDrawing = true
         let x = this.getBoundingClientRect().left
         let y = this.getBoundingClientRect().top
-        let scale = this.getBoundingClientRect().width / 500
+        let scale = this.getBoundingClientRect().width / defaultWidth
         startX = (event.clientX - x) / scale
         startY = (event.clientY - y) / scale
 
@@ -41,7 +42,7 @@
 
         let x = this.getBoundingClientRect().left
         let y = this.getBoundingClientRect().top
-        let scale = this.getBoundingClientRect().width / 500
+        let scale = this.getBoundingClientRect().width / defaultWidth
         // event.clientX / scale ->
         const currentX = (event.clientX - x) / scale
         const currentY = (event.clientY - y) / scale
