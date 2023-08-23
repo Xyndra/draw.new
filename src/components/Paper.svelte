@@ -9,11 +9,14 @@
 
 
     let last_time: number = Date.now();
-    function handleMouseDown(event: PointerEvent) {
+    function handleMouseDown(this: SVGElement, event: PointerEvent) {
         //console.log(event.pointerId + ": down")
         isDrawing = true
-        startX = event.clientX
-        startY = event.clientY
+        let x = this.getBoundingClientRect().left
+        let y = this.getBoundingClientRect().top
+        let scale = this.getBoundingClientRect().width / 500
+        startX = (event.clientX - x) / scale
+        startY = (event.clientY - y) / scale
 
         // Create a new path element and append it to the SVG element
         const newPath = document.createElementNS('http://www.w3.org/2000/svg', 'path')
@@ -29,15 +32,19 @@
     }
 
 
-    function handleMouseMove(event: PointerEvent) {
+    function handleMouseMove(this: SVGElement, event: PointerEvent) {
         //console.log(event.pointerId + ": move")
         if (!isDrawing) return
         if (!(currentPath instanceof SVGPathElement)) return
         if (Date.now() - last_time < 1000 / 30) return
         last_time = Date.now()
 
-        const currentX = event.clientX | 0
-        const currentY = event.clientY | 0
+        let x = this.getBoundingClientRect().left
+        let y = this.getBoundingClientRect().top
+        let scale = this.getBoundingClientRect().width / 500
+        // event.clientX / scale ->
+        const currentX = (event.clientX - x) / scale
+        const currentY = (event.clientY - y) / scale
         // Update the path data
         pathData += `M ${startX} ${startY} L ${currentX} ${currentY}`
         startX = currentX
@@ -94,6 +101,5 @@
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
-        touch-action: none;
     }
 </style>

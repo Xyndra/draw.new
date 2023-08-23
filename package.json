@@ -11,9 +11,12 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/lit": "^2.1.1",
     "@astrojs/svelte": "^2.0.2",
     "@tauri-apps/api": "^1.2.0",
+    "@webcomponents/template-shadowroot": "^0.2.1",
     "astro": "^2.0.16",
+    "lit": "^2.8.0",
     "svelte": "^3.55.1",
     "typescript": "^5.0.0",
     "vite": "^4.1.4"

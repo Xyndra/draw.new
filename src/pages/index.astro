@@ -1,16 +1,20 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Paper from "../components/Paper.svelte";
+import { Desk } from "../components/Desk.ts";
 ---
 
 <Layout title="Draw.new">
 	<main>
-		<Paper client:load/>
+		<Desk client:idle>
+			<Paper client:only="svelte"/>
+		</Desk>
 	</main>
 </Layout>
 
 <style is:global>
 	* {
 		overflow: hidden;
+		touch-action: none;
 	}
 </style>

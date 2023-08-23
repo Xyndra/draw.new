@@ -1,10 +1,12 @@
 import { defineConfig } from 'astro/config';
 import svelte from '@astrojs/svelte';
 
+import lit from "@astrojs/lit";
+
 // https://astro.build/config
 // noinspection JSUnusedGlobalSymbols
 export default defineConfig({
-    integrations: [svelte()],
+    integrations: [svelte(), lit()],
     vite: {
         server: {
             watch: {
@@ -14,6 +16,5 @@ export default defineConfig({
     },
     server: {
         port: 8080,
-        host: true,
     }
 });
